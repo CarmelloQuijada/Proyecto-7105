@@ -37,6 +37,9 @@
             border-bottom: 2px solid #f39c12;
             padding-bottom: 5px;
         }
+        h3 {
+            margin-top: 25px;
+        }
         p {
             text-align: justify;
             margin-bottom: 15px;
@@ -67,6 +70,22 @@
             margin-top: 40px;
             font-size: 0.9em;
         }
+        /* Estilos para leer más */
+        #leerMasBtn {
+            display: inline-block;
+            margin: 0 0 15px 0;
+            padding: 8px 15px;
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        #reseñaCompleta {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -79,9 +98,19 @@
         <h2>Información de la Institución</h2>
 
         <h3>Reseña histórica:</h3>
-        <p>La Escuela Luis Mariano Rivera, ubicada en Caracas, tiene una rica historia que se remonta a varios años atrás. Inicialmente, su primer director fue Elias Riera, y el primer nombre de la institución fue Escuela José Gregorio Hernández. En sus inicios, la escuela era una pequeña casita que posteriormente fue trasladada a unos terrenos que pertenecían a la Hacienda La Vega, los cuales fueron cedidos al Estado. En este nuevo emplazamiento, se construyó una sola planta que hasta el momento permanece con seis aulas.</p>
-        <p>La escuela pasó a llamarse Antimano II, y en ese momento contaba con una matrícula de 140 estudiantes. Con el paso de los años, en 2004, se llevó a cabo la construcción de una planta de cuatro pisos, la cual fue inaugurada por el entonces presidente Hugo Chávez. En ese momento, el ministro de Educación era Aristóbulo Istúriz. Sin embargo, la escuela enfrentaba el desafío del difícil acceso, ya que solo contaba con una calle y no había medios de transporte adecuados, situación que fue abordada por el ministro mencionado anteriormente. La directora en ese entonces era Tatiana Enrriquez, y la matrícula había aumentado a 186 estudiantes.</p>
-        <p>Al jubilarse Tatiana Enrriquez en 2016, el profesor Wilter Trocertt asumió la dirección de la institución. En el año 2024, la escuela cambió su nombre a Escuela Luis Mariano Rivera. A la fecha, se estima que la escuela tiene una edad de 59 años desde su fundación. Actualmente, su matrícula es de 366 estudiantes, lo que refleja un crecimiento significativo en comparación con sus inicios. Esta evolución demuestra el compromiso y el esfuerzo de la comunidad educativa para brindar una educación de calidad a sus estudiantes.</p>
+
+        <!-- Resumen inicial -->
+        <p id="resumenReseña">La Escuela Luis Mariano Rivera, fundada hace 59 años, ha crecido desde una pequeña casita hasta una institución con 366 estudiantes, reflejando compromiso y esfuerzo de su comunidad educativa.</p>
+
+        <!-- Botón para expandir -->
+        <button id="leerMasBtn" aria-expanded="false" aria-controls="reseñaCompleta">Desea leer más</button>
+
+        <!-- Texto completo oculto inicialmente -->
+        <div id="reseñaCompleta" aria-hidden="true">
+            <p>La Escuela Luis Mariano Rivera, ubicada en Caracas, tiene una rica historia que se remonta a varios años atrás. Inicialmente, su primer director fue Elias Riera, y el primer nombre de la institución fue Escuela José Gregorio Hernández. En sus inicios, la escuela era una pequeña casita que posteriormente fue trasladada a unos terrenos que pertenecían a la Hacienda La Vega, los cuales fueron cedidos al Estado. En este nuevo emplazamiento, se construyó una sola planta que hasta el momento permanece con seis aulas.</p>
+            <p>La escuela pasó a llamarse Antimano II, y en ese momento contaba con una matrícula de 140 estudiantes. Con el paso de los años, en 2004, se llevó a cabo la construcción de una planta de cuatro pisos, la cual fue inaugurada por el entonces presidente Hugo Chávez. En ese momento, el ministro de Educación era Aristóbulo Istúriz. Sin embargo, la escuela enfrentaba el desafío del difícil acceso, ya que solo contaba con una calle y no había medios de transporte adecuados, situación que fue abordada por el ministro mencionado anteriormente. La directora en ese entonces era Tatiana Enrriquez, y la matrícula había aumentado a 186 estudiantes.</p>
+            <p>Al jubilarse Tatiana Enrriquez en 2016, el profesor Wilter Trocertt asumió la dirección de la institución. En el año 2024, la escuela cambió su nombre a Escuela Luis Mariano Rivera. A la fecha, se estima que la escuela tiene una edad de 59 años desde su fundación. Actualmente, su matrícula es de 366 estudiantes, lo que refleja un crecimiento significativo en comparación con sus inicios. Esta evolución demuestra el compromiso y el esfuerzo de la comunidad educativa para brindar una educación de calidad a sus estudiantes.</p>
+        </div>
 
         <h3>Misión:</h3>
         <p>Formar estudiantes comprometidos con su comunidad, dotándolos de conocimientos sólidos, habilidades tecnológicas y valores éticos, para que se desarrollen como personas integrales y contribuyan positivamente a la sociedad.</p>
@@ -115,5 +144,29 @@
     <footer>
         &copy; 2025 Escuela Luis Mariano Rivera - Todos los derechos reservados
     </footer>
+
+    <script>
+        const btn = document.getElementById('leerMasBtn');
+        const completo = document.getElementById('reseñaCompleta');
+
+        btn.addEventListener('click', () => {
+            const isVisible = completo.style.display === 'block';
+            if (isVisible) {
+                completo.style.display = 'none';
+                btn.textContent = 'Desea leer más';
+                btn.setAttribute('aria-expanded', 'false');
+                completo.setAttribute('aria-hidden', 'true');
+                // Mostrar resumen y ocultar texto completo
+                document.getElementById('resumenReseña').style.display = 'block';
+            } else {
+                completo.style.display = 'block';
+                btn.textContent = 'Leer menos';
+                btn.setAttribute('aria-expanded', 'true');
+                completo.setAttribute('aria-hidden', 'false');
+                // Ocultar resumen cuando se despliega texto completo
+                document.getElementById('resumenReseña').style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
